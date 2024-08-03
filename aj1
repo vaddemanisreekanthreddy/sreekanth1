@@ -1,0 +1,314 @@
+public class BusinessException extends Exception {
+    public BusinessException(String string) {
+        super(string);
+    }
+}
+
+public class LoginBo {
+	LoginDao dao=new LoginDao();
+	boolean isValidData(String name, String password) throws BusinessException{
+		if(name==null || password==null || name.equals("") || password.equals("")){
+			 new BusinessException("Invalid");
+		}
+		return dao.isValidData(name, password);
+	}
+
+	
+	
+}
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+public class LoginDao {
+	PreparedStatement pt = null;
+	Connection con = null;
+
+	boolean isValidData(String name, String password) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "J2EE@java");
+			pt = con.prepareStatement("SELECT * FROM user WHERE name = ? AND password = ?");
+			pt.setString(1, name);
+			pt.setString(2, password);
+			ResultSet set = pt.executeQuery();
+			if (set.next() == false)
+				throw new BusinessException("InvalidEntry");
+			return true;
+		} catch (SQLException | ClassNotFoundException | BusinessException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+}
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/LoginServlet")
+public class LoginServlet  extends HttpServlet{
+    LoginBo login=new LoginBo();
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String name=req.getParameter("name");
+		String password=req.getParameter("password");
+		System.out.println(name+"  "+password);
+		try {
+			if(login.isValidData(name, password)) 
+				res.sendRedirect("welcome.html");
+			else
+				res.sendRedirect("login.html");
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
+}
+public class User {
+    private String username;
+    private String password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    // Getters and Setters
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        *{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+        #out{
+        height: 100vh;
+        width: 100%;
+        /* border: 2px solid red; */
+        background-color: rgba(49, 50, 50, 0.183);
+     }
+     h1{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: rgb(90, 4, 17);
+        font-size: 40px;
+        /* margin-top: 58px; */
+        /* padding-bottom: 15px; */
+        padding-top: 58px;
+     }
+     #login{
+        height: 300px;
+        width: 500px;
+        /* border: 2px solid red; */
+        margin:50px auto;
+        background-color: #04424244;
+     }
+     
+     h2{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: blue;
+        font-size: 28px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+     }
+     form {
+            max-width: 300px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+        }
+        input{
+            border: none;
+            border-radius: 4px;
+
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 50px;
+            background-color: #346dc2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+           font-size:large;
+        }
+        input[type="submit"]:hover {
+            background-color: #d80000;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+   
+    <div id="out">
+        <center>   
+            <h1>PLEASE ENTER LOGIN DETAILS</h1>
+       </center> 
+   <div id="login">
+<center>   
+     <h2>LOGIN PAGE</h2>
+</center>    
+    <form action="LoginServlet" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <center>   
+            <input type="submit" value="LOGIN" />
+        </center>  
+    </form>
+   </div>
+</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Welcome</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+#main {
+	height: 70vh;
+	width: 190vh;
+	border: 2px solid green;
+	margin: 60px auto;
+}
+h1 {
+	font-size: 50px;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: blue;
+	margin-top: 40px;
+}
+h3 {
+	font-size: 30px;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: rgb(255, 0, 93);
+	padding-top: 10px;
+	margin-bottom: 40px;
+}
+a {
+	padding: 10px 40px;
+	background-color: rgb(35, 29, 29);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: 20px;
+	font-weight: bolder;
+	text-decoration: none;
+	border: 2px solid black;
+	border-radius: 4px;
+	color: aliceblue;
+}
+a:hover {
+	padding: 10px 40px;
+	background-color: rgba(111, 110, 110, 0.166);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: 20px;
+	font-weight: bolder;
+	text-decoration: none;
+	border: 2px solid black;
+	border-radius: 4px;
+	color: black;
+}
+#icons {
+	height: 10vh;
+	width: 100vh;
+	/* border: 2px solid rgb(26, 35, 26); */
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-bottom: 40px;
+}
+</style>
+</head>
+<body>
+	<center>
+		<div id="main">
+			<h1>WELCOME! YOUR JOURNEY STARTS HERE</h1>
+			<div id="icons">
+				<i class="fa fa-star" aria-hidden="true"
+					style="color: gold; font-size: 40px;"></i> <i class="fa fa-star"
+					aria-hidden="true" style="color: gold; font-size: 40px;"></i> <i
+					class="fa fa-star" aria-hidden="true"
+					style="color: gold; font-size: 40px;"></i> <i class="fa fa-star"
+					aria-hidden="true" style="color: gold; font-size: 40px;"></i> <i
+					class="fa fa-star" aria-hidden="true"
+					style="color: gold; font-size: 40px;"></i>
+			</div>
+			<h3>YOU WANT TO LOGOUT CLICK BELOW</h3>
+			<a href="LogoffServlet">LOGOFF</a>
+		</div>
+	</center>
+</body>
+</html>
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/LogoffServlet")
+public class LogoffServlet extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		if (session != null)
+			session.invalidate();
+		res.sendRedirect("login.html");
+	}
+}
