@@ -312,3 +312,955 @@ public class LogoffServlet extends HttpServlet {
 		res.sendRedirect("login.html");
 	}
 }
+
+
+------------------------------------------------------------------------------------------
+Login
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+
+
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+#health{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logger{
+    height: 200px;
+    width: 350px;
+    border: 3px solid red;
+    border-radius: 10px;
+    
+}
+h1{
+margin: 15px 0;
+font-weight: 100px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+h4{
+    color: rgb(93, 93, 93);
+margin-bottom: 60px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 15px 20px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+}
+a:hover{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(24, 24, 24);
+padding: 15px 20px;
+text-decoration: none;
+color: rgb(255, 255, 255);
+font-weight: bolder;
+border-radius: 10px;
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div id="health">
+
+        <div class="logger">
+            <center>
+     <h1>Health Logger</h1>
+     <h4>Developed by Sreekanth Reddy</h4>
+     <a href="www">DOCTOR LOGIN</a>
+            </center>
+         </div>
+    </div>
+</body>
+</html>
+
+Login2
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#health{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logger{
+    height: 300px;
+    width: 350px;
+    border: 3px solid red;
+    border-radius: 10px;
+}
+h1{
+margin: 15px 0;
+font-weight: 100px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+h4{
+    color: rgb(93, 93, 93);
+margin-bottom: 60px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 15px 20px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+height: 50px;
+width: 200px;
+display: flex;
+margin: 20px 5px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a:hover{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(24, 24, 24);
+padding: 15px 20px;
+text-decoration: none;
+color: rgb(255, 255, 255);
+font-weight: bolder;
+border-radius: 10px;
+}
+    </style>
+</head>
+<body>
+    <div id="health">
+
+        <div class="logger">
+            <center>
+     <h1>Health Logger</h1>
+     <h4>Developed by Sreekanth Reddy</h4>
+     <a href="www">MANAGE PATIENTS</a>
+     <a href="www">MANAGE VITALS</a>
+            </center>
+         </div>
+    </div>
+</body>
+</html>
+
+
+DoctorHomeVitals
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Users</title>
+    <style>
+        table {
+            width: 95.5%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 18px;
+            text-align: left;
+ margin: 0 auto;
+        }
+        th, td {
+            padding: 12px;
+            width: auto;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .firstnav,.secondnav{
+            height: 70px ;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .buttons{
+            height: 70px ;
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        h2,h3{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-left: 30px;
+            color: red;
+        }
+        .firstnav>a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 25px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons>a{
+    
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 10px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+tr>.action>a{
+    height: 20px;
+    /* width: 250px; */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 3px 0px;
+text-decoration: none;
+font-weight: bolder;
+border-radius: 10px;
+display: flex;
+    align-items: center;
+    justify-content: center; 
+
+}
+ 
+    </style>
+</head>
+<body>
+<div class="firstnav">
+    <h2>DOCTOR HOME PAGE</h2>
+    <a href="www">LOGOUT</a>
+
+</div>
+
+<div class="secondnav">
+    <h3>Vitals</h3>
+<div class="buttons">
+    <a href="www">Manage Patients</a>
+    <a href="www">Expot</a>
+    <a href="www">Record New Vital</a>
+    <a href="www">Vital Alerts</a>
+</div>
+</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>BP Low</th>
+                <th>BP High</th>
+                <th>SPO2</th>
+                <th>Recorded On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="user" items="${userList}">
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth</td>
+                    <td>9876543210</td>
+                    <td>70</td>
+                    <td>90</td>
+                    <td>130</td>
+                    <td>12-09-2020 02:00 PM</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+                    </td> 
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth</td>
+                    <td>9876543210</td>
+                    <td>70</td>
+                    <td>90</td>
+                    <td>130</td>
+                    <td>12-09-2020 02:00 PM</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+                    </td> 
+                    
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth</td>
+                    <td>9876543210</td>
+                    <td>70</td>
+                    <td>90</td>
+                    <td>130</td>
+                    <td>12-09-2020 02:00 PM</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+                    </td> 
+                    
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+DOCTOR HOME
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Users</title>
+    <style>
+        table {
+            width: 95.5%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 18px;
+            text-align: left;
+ margin: 0 auto;
+        }
+        th, td {
+            padding: 12px;
+            width: auto;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size:15px ;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+         tr>.actionmain{
+            width: 190px;
+            
+        } 
+        tr>.action{
+            display: flex;
+        }
+        tr>.action>a{
+             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+margin: 0 5px;
+padding: 5px 7px; 
+text-decoration: none;
+font-weight: bold;
+border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+        }
+        .firstnav,.secondnav{
+            height: 70px ;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .buttons{
+            height: 70px ;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        h2{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-left:27px;
+            color: red;
+        }
+
+        h3{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            /* margin-left: px; */
+        }
+        .firstnav>a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 25px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons>a{
+    
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 10px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ 
+    </style>
+</head>
+<body>
+<div class="firstnav">
+    <h2>DOCTOR HOME PAGE</h2>
+    <a href="www">LOGOUT</a>
+
+</div>
+
+<div class="secondnav">
+<div class="buttons">
+    <h3>Patients[3]</h3>
+    <a href="www">Search Patients</a>
+    <a href="www">Add Patients</a>
+    <a href="www">Manage Vitals</a>
+</div>
+</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Sr N0</th>
+                <th>Name-Age</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Diagnosis</th>
+                <th>Remarks</th>
+                <th>Gender</th>
+                <th class="actionmain">Action</th>
+               
+
+                
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="user" items="${userList}">
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth-23</td>
+                    <td>Sree2727@gmail.com</td>
+                    <td>9876543210</td>
+                    <td>Blood Presure</td>
+                    <td>Nothing to Worry</td>
+                    <td>Male</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: green; color:white">Manage Vitals</a>
+                        <a href="www" style="background-color: Blue;color:white">Update</a>
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth-23</td>
+                    <td>Sree2727@gmail.com</td>
+                    <td>9876543210</td>
+                    <td>Blood Presure</td>
+                    <td>Nothing to Worry</td>
+                    <td>Male</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: green; color:white">Manage Vitals</a>
+                        <a href="www" style="background-color: Blue;color:white">Update</a>
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth Reddy-23</td>
+                    <td>Sree2727@gmail.com</td>
+                    <td>9876543210</td>
+                    <td>Blood Presure</td>
+                    <td>Nothing to Worry</td>
+                    <td>Male</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: green; color:white">Manage Vitals</a>
+                        <a href="www" style="background-color: Blue;color:white">Update</a>
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth-23</td>
+                    <td>Sree2727@gmail.com</td>
+                    <td>9876543210</td>
+                    <td>Blood Presure</td>
+                    <td>Nothing to Worry</td>
+                    <td>Male</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: green; color:white">Manage Vitals</a>
+                        <a href="www" style="background-color: Blue;color:white">Update</a>
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+Vitals
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Users</title>
+    <style>
+        table {
+            width: 95.5%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 18px;
+            text-align: left;
+ margin: 0 auto;
+        }
+        th, td {
+            padding: 12px;
+            width: auto;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .firstnav,.secondnav{
+            height: 70px ;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .buttons{
+            height: 70px ;
+            width: 35%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        h2,h3{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-left: 30px;
+            color: red;
+        }
+        .firstnav>a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 25px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons>a{
+    
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 10px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+tr>.action{
+    /* padding: 5px 0px; */
+}
+tr>.action>a{
+    height: 20px;
+    /* width: 250px; */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 3px 0px;
+text-decoration: none;
+font-weight: bolder;
+border-radius: 10px;
+display: flex;
+    align-items: center;
+    justify-content: center; 
+
+}
+
+
+ 
+    </style>
+</head>
+<body>
+<div class="firstnav">
+    <h2>Vital Alerts</h2>
+    <a href="www">LOGOUT</a>
+
+</div>
+
+<div class="secondnav">
+    <h3>Vitals</h3>
+<div class="buttons">
+    <a href="www">Manage Patients</a>
+    <a href="www">Expot</a>
+    <a href="www">Record New Vital</a>
+</div>
+</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>BP Low</th>
+                <th>BP High</th>
+                <th>SPO2</th>
+                <th>Recorded On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="user" items="${userList}">
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth</td>
+                    <td>9876543210</td>
+                    <td>70</td>
+                    <td>90</td>
+                    <td>130</td>
+                    <td>12-09-2020 02:00 PM</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+                    </td>                
+                  </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth Reddy</td>
+                    <td>9876543210</td>
+                    <td>70</td>
+                    <td>90</td>
+                    <td>130</td>
+                    <td>12-09-2020 02:00 PM</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+                    </td>                    
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sreekanth</td>
+                    <td>9876543210</td>
+                    <td>70</td>
+                    <td>90</td>
+                    <td>130</td>
+                    <td>12-09-2020 02:00 PM</td>
+                    <td class="action" >
+                        <a href="www" style="background-color: red;color:white">Delete</a>
+                    </td>                   
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</body>
+</html>
+_-----------------------------------------------------------------------
+
+
+package minithree;
+
+import java.security.Timestamp;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PatientsDao {
+	List<Patient> patients = new ArrayList();
+	Connection con = null;
+	PreparedStatement pt = null;
+	public void toSavePatient(String name, String phone, String age, String gender, String diagnosis, String remarks) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthdb", "root", "J2EE@java");
+			pt = con.prepareStatement(
+					"insert into patients(name,phone,age,gender,diagnosis,remarks) values (?,?,?,?,?,?)");
+			pt.setString(1, name);
+			pt.setString(2, phone);
+			pt.setInt(3, Integer.parseInt(age));
+			pt.setString(4, gender);
+			pt.setString(5, diagnosis);
+			pt.setString(6, diagnosis);
+			pt.execute();
+			System.out.println("Row Inserted");
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Patient> listOfPatients() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthdb", "root", "J2EE@java");
+			pt = con.prepareStatement("select * from patients");
+			ResultSet set = pt.executeQuery();
+			while (set.next()) {
+				Patient patient = new Patient();
+				patient.setId(set.getInt(1));
+				patient.setName(set.getString(2));
+				patient.setPhone(set.getString(3));
+				patient.setAge(set.getInt(4));
+				patient.setGender(set.getString(5));
+				patient.setDiagnosis(set.getString(6));
+				patient.setRemarks(set.getString(7));
+				patients.add(patient);
+			}
+			return patients;
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Patient> listOfSearchPatients(String search) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthdb", "root", "J2EE@java");
+			pt = con.prepareStatement("SELECT * FROM patients WHERE name LIKE ?");
+			pt.setString(1, search);
+			ResultSet set = pt.executeQuery();
+			while (set.next()) {
+				Patient patient = new Patient();
+				patient.setId(set.getInt(1));
+				patient.setName(set.getString(2));
+				patient.setPhone(set.getString(3));
+				patient.setAge(set.getInt(4));
+				patient.setGender(set.getString(5));
+				patient.setDiagnosis(set.getString(6));
+				patient.setRemarks(set.getString(7));
+				patients.add(patient);
+//				System.out.println(patient);
+			}
+			return patients;
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void toAddPatientVitals(String name, String phone, int bpLow, int bpHigh, int spo2) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthdb", "root", "J2EE@java");
+			String sql = "INSERT INTO patientvitals (name, phone, bpLow, bpHigh, spo2) VALUES (?, ?, ?, ?, ?)";
+			pt = con.prepareStatement(sql);
+			pt.setString(1, name);
+			pt.setString(2, phone);
+			pt.setInt(3, bpLow);
+			pt.setInt(4, bpHigh);
+			pt.setInt(5, spo2);
+			pt.executeUpdate();
+			System.out.println("Row Inserted");
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void filterVitalPatients() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthdb", "root", "J2EE@java");
+			pt = con.prepareStatement(
+					"SELECT *FROM patientvitals  WHERE bpLow NOT BETWEEN 70 AND 90 OR bpHigh NOT BETWEEN 120 AND 150 OR spo2 NOT BETWEEN 95 AND 100");
+			ResultSet set = pt.executeQuery();
+			if (set.next())
+				System.out.println("Vital are came");
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+package minithree;
+
+import java.io.IOException;
+import java.security.Timestamp;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class PatientsController extends HttpServlet {
+   
+	
+	
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	String name=req.getParameter("name");
+	String phone=req.getParameter("phone");
+	String age=req.getParameter("age");
+	String gender=req.getParameter("gender");
+	String diagnosis=req.getParameter("diagnosis");
+	String remarks=req.getParameter("remarks");
+//	dao.toSavePatient(name,phone,age,gender,diagnosis,remarks);
+	}
+
+public static void main(String[] args) {
+	PatientsDao dao=new PatientsDao();
+//	dao.toSavePatient("Sreekanth","8765432","23","Male","BloodPresure","Nothing");
+//	System.out.println(dao.listOfPatients());
+//	System.out.println(dao.listOfSearchPatients("Sree%"));
+//	dao.toAddPatientVitals("Sreekanth", "8765432", 80, 130, 96);
+	dao.filterVitalPatients();
+}
+}
+
+
+
+package minithree;
+public class Patient {
+    private int id;
+    private String name;
+    private String phone;
+    private int age;
+    private String gender;
+    private String diagnosis;
+    private String remarks;
+
+    // Constructor
+    
+
+    public Patient() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", name=" + name + ", phone=" + phone + ", age=" + age + ", gender=" + gender
+				+ ", diagnosis=" + diagnosis + ", remarks=" + remarks + "]";
+	}
+
+	// Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+	public Patient(int id, String name, String phone, int age, String gender, String diagnosis, String remarks) {
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.age = age;
+		this.gender = gender;
+		this.diagnosis = diagnosis;
+		this.remarks = remarks;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+    
+}
