@@ -1264,3 +1264,443 @@ public class Patient {
 
     
 }
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration</title>
+<style>
+ 
+#patientinformation
+{
+    border: 3px solid rgb(53, 53, 53);
+    height: 100%;
+    width: 400px;
+    margin: 50px auto;
+}
+ 
+ 
+.PatientInfo{
+    height: 70px;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+ 
+
+label{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+input
+{
+    height: 25px;
+    width: 300px;
+}
+ 
+textarea{
+    height: 75px;
+    width: 300px;
+}
+ 
+#GenderRadio
+{
+    height: 15px;
+    width: 12px;
+}
+ 
+ 
+  .button {
+  color: rgb(0, 0, 0);
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bolder;
+  margin: 10px 0px;
+  cursor: pointer;
+  margin-left: 30px;
+  border:2px solid rgb(2, 2, 2);
+  border-radius: 13px;
+  }
+ 
+.button:hover{
+    background-color: rgb(0, 0, 0);
+    color: white;
+
+}
+h1,h4{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: brown;
+}
+
+</style>
+<body>
+<div id="patientinformation">
+<center>
+    <h1 >Health Logger</h1>
+<h4 >Add/Update Patient Information</h4>
+</center>
+<form action="" method="">
+    <div class="PatientInfo">
+        <label for="Name">Name</label>
+        <br>
+        <input type="text" id="Name" >
+    </div>
+    <div class="PatientInfo">
+        <label for="Email">Email</label>
+        <br>
+        <input type="text" id="Email">
+    </div>
+    <div class="PatientInfo">
+        <label for="Phone">Phone</label>
+        <br>
+        <input type="text" id="Phone">
+    </div>
+    <div class="PatientInfo">
+        <label for="Age">Age</label>
+        <br>
+        <input type="text" id="Age">
+    </div>
+    <div class="PatientInfo">
+        <label for="Diagnosis">Diagnosis</label>
+        <br>
+        <input type="text" id="Diagnosis">
+    </div>
+    <div class="PatientInfo">
+        <label for="Remarks">Remarks</label>
+        <br>
+        <textarea name="Remarks" id=""></textarea>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="PatientInfo">
+        <label for="GenderRadio"> Gender</label>
+        <br>
+        <input type="radio" name="Gender" id="GenderRadio">Male
+        <br>
+        <input type="radio" name="Gender" id="GenderRadio">female
+    </div>
+    <center><button class="button">SUBMIT</button></center>
+</div>
+</form>
+</body>
+</html>
+    +==================================================
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import="minithree.PatientsDao"%>
+<%@page import="minithree.Patient"%>
+<%@page import="java.util.List"%>
+<%
+PatientsDao dao=new PatientsDao();
+List<Patient> pt=dao.listOfPatients();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Users</title>
+    <style>
+        table {
+            width: 95.5%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 18px;
+            text-align: left;
+ margin: 0 auto;
+        }
+        th, td {
+            padding: 12px;
+            width: auto;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size:15px ;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+         tr>.actionmain{
+            width: 190px;
+        } 
+        tr>.action{
+            display: flex;
+        }
+        tr>.action>a{
+             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+margin: 0 5px;
+padding: 5px 7px; 
+text-decoration: none;
+font-weight: bold;
+border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+        }
+        .firstnav,.secondnav{
+            height: 70px ;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .buttons{
+            height: 70px ;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        h2{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-left:27px;
+            color: red;
+        }
+
+        h3{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            /* margin-left: px; */
+        }
+        .firstnav>a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 25px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons>a{
+    
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 5px 10px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+margin-right: 10px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ 
+    </style>
+</head>
+<body>
+<div class="firstnav">
+    <h2>DOCTOR HOME PAGE</h2>
+    <a href="www">LOGOUT</a>
+
+</div>
+
+<div class="secondnav">
+<div class="buttons">
+   <h3>Patients[<%= pt.size() %>]</h3>
+
+    <a href="www">Search Patients</a>
+    <a href="RegistrationForm.jsp">Add Patients</a>
+    <a href="www">Manage Vitals</a>
+</div>
+</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Sr N0</th>
+                <th>Name-Age</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Diagnosis</th>
+                <th>Remarks</th>
+                <th>Gender</th>
+                <th class="actionmain">Action</th>
+               
+
+                
+            </tr>
+        </thead>
+        <tbody>
+            <%
+    for (Patient p : pt) {
+%>
+    <tr>
+        <td><%= p.getId() %></td>
+        <td><%= p.getName() %></td>
+         <td><%= p.getName() %></td>
+        <td><%= p.getPhone() %></td>
+         <td><%= p.getRemarks()%></td>
+        <td><%= p.getRemarks()%></td>
+        <td><%= p.getGender() %></td>
+        <td class="action">
+            <a href="" style="background-color: green; color: white">Manage Vitals</a>
+            <a href="www" style="background-color: blue; color: white">Update</a>
+            <a href="www" style="background-color: red; color: white">Delete</a>
+        </td>
+    </tr>
+<%
+    }
+%>
+
+              
+        </tbody>
+    </table>
+</body>
+</html>
+
++========================================================================================================
+<%@page import="minithree.PatientsDao"%>
+<%@page import="minithree.Patient"%>
+<%@page import="java.util.List"%>
+
+
+
+
+<%
+PatientsDao dao=new PatientsDao();
+dao.listOfPatients();
+System.out.println("Executed");
+
+List<Patient> pt=dao.listOfPatients();
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script type="text/javascript">
+    
+    
+    
+    </script>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#health{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logger{
+    height: 200px;
+    width: 350px;
+    border: 3px solid red;
+    border-radius: 10px;
+    
+}
+h1{
+margin: 15px 0;
+font-weight: 100px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+h4{
+    color: rgb(93, 93, 93);
+margin-bottom: 60px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+a{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(218, 218, 218);
+padding: 15px 20px;
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-weight: bolder;
+border-radius: 10px;
+}
+a:hover{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+background-color: rgb(24, 24, 24);
+padding: 15px 20px;
+text-decoration: none;
+color: rgb(255, 255, 255);
+font-weight: bolder;
+border-radius: 10px;
+}
+</style>
+</head>
+<body>
+    <div id="health">
+        <div class="logger">
+            <center>
+     <h1>Health Logger</h1>
+     <h4>Developed by Sreekanth Reddy</h4>
+     <a href="LoginForm.jsp">DOCTOR LOGIN</a>
+            </center>
+         </div>
+     
+    </div>
+</body>
+</html>
+==================================================================================
+package minithree;
+
+import java.io.IOException;
+import java.security.Timestamp;
+import java.util.ArrayList;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/RegistrationForm.jsp")
+public class PatientsController extends HttpServlet {
+	
+	
+	@Override
+		protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String name = req.getParameter("name");
+		String phone = req.getParameter("phone");
+		String age = req.getParameter("age");
+		String gender = req.getParameter("gender");
+		String diagnosis = req.getParameter("diagnosis");
+		String remarks = req.getParameter("remarks");
+//	dao.toSavePatient(name,phone,age,gender,diagnosis,remarks);
+		System.out.println(name+phone+age+gender+diagnosis+remarks);
+		}
+//	@Override
+//	protected void (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		String name = req.getParameter("name");
+//		String phone = req.getParameter("phone");
+//		String age = req.getParameter("age");
+//		String gender = req.getParameter("gender");
+//		String diagnosis = req.getParameter("diagnosis");
+//		String remarks = req.getParameter("remarks");
+////	dao.toSavePatient(name,phone,age,gender,diagnosis,remarks);
+//		System.out.println(name+phone+age+gender+diagnosis+remarks);
+//	}
+
+	public static void main(String[] args) {
+		PatientsDao dao = new PatientsDao();
+//		dao.toSavePatient("Sridevi Vaddemani", "9876543210", "27", "Male", "Fever", "Nothing");
+//	System.out.println(dao.listOfPatients());
+//	System.out.println(dao.listOfSearchPatients("Sree%"));
+//	dao.toAddPatientVitals("Sreekanth", "8765432", 80, 130, 96);
+		dao.filterVitalPatients();
+	}
+}
