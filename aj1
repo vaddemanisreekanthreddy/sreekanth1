@@ -1,3 +1,202 @@
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List"%>
+<%@ page import="minithree.PatientVitals"%>
+<%@ page import="minithree.PatientsDao"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%
+    PatientsDao dao = new PatientsDao();
+    List<PatientVitals> vitalsList = dao.patientVitals();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Display Vitals</title>
+<style>
+/* CSS Code */
+table {
+    width: 95.5%;
+    border-collapse: collapse;
+    margin: 50px 0;
+    font-size: 18px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 12px;
+    width: auto;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.firstnav, .secondnav {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttons {
+    height: 70px;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+h2, h3 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-left: 30px;
+    color: red;
+}
+
+.firstnav>a {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: rgb(218, 218, 218);
+    padding: 5px 10px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    border-radius: 10px;
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons>a {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: rgb(218, 218, 218);
+    padding: 5px 10px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    border-radius: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+tr>.action>a {
+    height: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: rgb(218, 218, 218);
+    padding: 3px 0px;
+    text-decoration: none;
+    font-weight: bolder;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var dataArray = [['Timestamp', 'BP Low', 'BP High', 'SPO2']];
+
+        <% 
+            // Use a for loop to populate the data array in JSP
+            for (PatientVitals p : vitalsList) {
+        %>
+        dataArray.push(['<%= p.getTimestamp() %>', <%= p.getBpLow() %>, <%= p.getBpHigh() %>, <%= p.getSpo2() %>]);
+        <% } %>
+
+        var data = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+            title: 'Patient Vitals Over Time',
+            hAxis: {title: 'Recorded On', titleTextStyle: {color: '#333'}},
+            vAxis: {title: 'Values', minValue: 0},
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            isStacked: true // Stacked Area Chart
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+</head>
+<body>
+    <div class="firstnav">
+        <h2>DOCTOR HOME PAGE</h2>
+        <a href="Login.jsp">LOGOUT</a>
+    </div>
+
+    <div class="secondnav">
+        <h3>Vitals</h3>
+        <div class="buttons">
+            <a href="DoctorHome.jsp">Manage Patients</a>
+            <a href="">Export</a>
+            <a href="VitalsAdd.jsp">Record New Vital</a>
+            <a href="VitalsAlert.jsp">Vital Alerts</a>
+        </div>
+    </div>
+
+    <!-- Area Chart Div -->
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+    <!-- Table of Vitals -->
+    <table>
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>BP Low</th>
+                <th>BP High</th>
+                <th>SPO2</th>
+                <th>Recorded On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (PatientVitals p : vitalsList) { %>
+            <tr>
+                <td><%= p.getId() %></td>
+                <td><%= p.getName() %></td>
+                <td><%= p.getPhoneNumber() %></td>
+                <td><%= p.getBpLow() %></td>
+                <td><%= p.getBpHigh() %></td>
+                <td><%= p.getSpo2() %></td>
+                <td><%= p.getTimestamp() %></td>
+                <td class="action">
+                    <a href="DeletePatientVitals?id=<%= p.getId() %>" style="background-color: red; color: white">Delete</a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+
 public class BusinessException extends Exception {
     public BusinessException(String string) {
         super(string);
