@@ -1,4 +1,27 @@
+CREATE TABLE PassengerDetails (
+    Passenger_id INT AUTO_INCREMENT PRIMARY KEY,
+    Passenger_name VARCHAR(50) NOT NULL,
+    Passenger_dob DATE NOT NULL,
+    Passenger_phone VARCHAR(50) NOT NULL UNIQUE,
+    Passenger_email VARCHAR(50) NOT NULL UNIQUE
+);
 
+create database Passenger;
+use Passenger;
+
+
+INSERT INTO PassengerDetails (Passenger_name, Passenger_dob, Passenger_phone, Passenger_email) VALUES
+('John Doe', '1985-07-15', '123-456-7890', 'john.doe@example.com'),
+('Jane Smith', '1990-11-23', '987-654-3210', 'jane.smith@example.com'),
+('Alice Johnson', '1982-03-29', '555-123-4567', 'alice.johnson@example.com'),
+('Bob Brown', '1978-12-05', '555-765-4321', 'bob.brown@example.com');
+
+
+select * from PassengerDetails;
+
+
+drop table PassengerDetails;
+------------------------------------------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List"%>
