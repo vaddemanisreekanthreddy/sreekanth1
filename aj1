@@ -1,3 +1,469 @@
+
+
+Spring Framework Problem Statement_3
+Spring Bean Scopes in IoC Container
+pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"> 
+ <modelVersion>4.0.0</modelVersion> 
+ <groupId>com.springframework</groupId> 
+ <artifactId>Spring_ShoppingCart_PracticeExercise</artifactId> 
+ <version>0.0.1-SNAPSHOT</version> 
+ <name>Spring_ShoppingCart_PracticeExercise</name> 
+  
+ <properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<maven.compiler.source>1.11</maven.compiler.source>
+<maven.compiler.target>1.11</maven.compiler.target>
+<spring.version>5.1.0.RELEASE</spring.version>
+<log4j.version>2.11.1</log4j.version>
+<junit.version>5.3.1</junit.version> 
+ </properties> 
+  
+ <dependencies>
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-core</artifactId>
+<version>${spring.version}</version>
+</dependency>
+ 
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-context</artifactId>
+<version>${spring.version}</version>
+</dependency> 
+ 
+ </dependencies> 
+ 
+</project> 
+ 
+ 
+ 
+ 
+ 
+ 
+Product.java
+package com.di.constructorMethod;
+ 
+public class Product {
+ 
+private int productId;
+private String productName;
+private double productPrice;
+ 
+public Product(int productId, String productName, double productPrice) {
+super();
+this.productId = productId;
+this.productName = productName;
+this.productPrice = productPrice;
+}
+ 
+@Override
+public String toString() {
+return "Product [productId=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
++ "]";
+}
+ 
+}
+ 
+Battery.java
+package com.di.constructorMethod;
+ 
+public class Battery extends Product {
+ 
+private boolean rechargeable;
+ 
+public Battery(int productId, String productName, double productPrice, boolean rechargeable) {
+super(productId, productName, productPrice);
+this.rechargeable = rechargeable;
+}
+ 
+@Override
+public String toString() {
+return "Battery ["+ super.toString() + " rechargeable=" + rechargeable + "]";
+}
+ 
+}
+Disc.java
+package com.di.constructorMethod;
+ 
+public class Disc extends Product {
+ 
+private int capacity;
+ 
+public Disc(int productId, String productName, double productPrice, int capacity) {
+super(productId, productName, productPrice);
+this.capacity = capacity;
+}
+ 
+@Override
+public String toString() {
+return "Disc [" + super.toString() +" capacity=" + capacity + "MB" + "]";
+}
+ 
+ 
+ 
+} 
+ 
+ShoppingCart.java
+package com.scopes.iocContainer;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+import com.di.constructorMethod.Product;
+ 
+public class ShoppingCart {
+ 
+private List<Product> items = new ArrayList<>();
+ 
+public void addItem(Product item) {
+items.add(item);
+}
+ 
+public List<Product> getItems(){
+return items;
+}
+ 
+@Override
+public String toString() {
+return "ShoppingCart [items=" + items + "]";
+}
+ 
+}
+ 
+ 
+applicationContext.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd"> 
+           
+      <bean id="battery" class="com.di.constructorMethod.Battery"> 
+                              <constructor-arg name="productId" value="101"></constructor-arg> 
+                              <constructor-arg name="productName" value="Nippo Battery"></constructor-arg> 
+                              <constructor-arg name="productPrice" value="15.50"></constructor-arg> 
+                              <constructor-arg name="rechargeable" value="true"></constructor-arg> 
+      </bean> 
+       
+      <bean id="disc" class="com.di.constructorMethod.Disc"> 
+                              <constructor-arg name="productId" value="201"></constructor-arg> 
+                              <constructor-arg name="productName" value="Hard Disk"></constructor-arg> 
+                              <constructor-arg name="productPrice" value="30"></constructor-arg> 
+                              <constructor-arg name="capacity" value="512"></constructor-arg> 
+      </bean> 
+       
+      <bean id="shoppingCart" class="com.scopes.iocContainer.ShoppingCart" scope="prototype"> 
+      </bean> 
+          
+</beans>
+ 
+ 
+ 
+ 
+ 
+App.java
+package com.scopes.iocContainer;
+ 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+ 
+import com.di.constructorMethod.Product;
+ 
+public class App {
+ 
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+ 
+ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+Product battery = (Product) ac.getBean("battery");
+Product disc = (Product) ac.getBean("disc");
+ 
+ShoppingCart cart1 = (ShoppingCart) ac.getBean("shoppingCart");
+cart1.addItem(battery);
+cart1.addItem(disc);
+ 
+ShoppingCart cart2 = (ShoppingCart) ac.getBean("shoppingCart");
+cart2.addItem(disc);
+ 
+System.out.println("First cart: " + cart1);
+System.out.println("Second cart: " + cart2);
+ 
+((AbstractApplicationContext) ac).close();
+ 
+}
+ 
+} 
+ 
+ 
+ 
+ 
+day3 by Kotu VasudevKotu Vasudev9:24 AM
+day3
+     Spring Framework Problem Statement_4 Pr... by Kotu VasudevKotu Vasudev9:24 AM
+ 
+ 
+Spring Framework Problem Statement_4
+Properties Files
+Pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion> 
+ <groupId>com.springframework</groupId> 
+ <artifactId>Spring_ShoppingCart_PracticeExercise</artifactId> 
+ <version>0.0.1-SNAPSHOT</version> 
+ <name>Spring_ShoppingCart_PracticeExercise</name> 
+  
+ <properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<maven.compiler.source>1.11</maven.compiler.source>
+<maven.compiler.target>1.11</maven.compiler.target>
+<spring.version>5.1.0.RELEASE</spring.version>
+<log4j.version>2.11.1</log4j.version>
+<junit.version>5.3.1</junit.version> 
+ </properties> 
+  
+ <dependencies>
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-core</artifactId>
+<version>${spring.version}</version>
+</dependency>
+ 
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-context</artifactId>
+<version>${spring.version}</version>
+</dependency> 
+ 
+ </dependencies> 
+ 
+</project>
+ 
+ 
+Product.java
+package com.di.constructorMethod;
+ 
+public class Product {
+ 
+private int productId;
+private String productName;
+private double productPrice;
+private double productDiscount;
+ 
+public Product(int productId, String productName, double productPrice) {
+super();
+this.productId = productId;
+this.productName = productName;
+this.productPrice = productPrice;
+}
+ 
+public double getProductDiscount() {
+return productDiscount;
+}
+ 
+public void setProductDiscount(double productDiscount) {
+this.productDiscount = productDiscount;
+}
+ 
+@Override
+public String toString() {
+return "Product [productId=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
++ ", productDiscount=" + productDiscount + "]";
+}
+ 
+}
+ 
+Battery.java
+package com.di.constructorMethod;
+ 
+public class Battery extends Product {
+ 
+private boolean rechargeable;
+private double productDiscount;
+ 
+public Battery(int productId, String productName, double productPrice, boolean rechargeable) {
+super(productId, productName, productPrice);
+this.rechargeable = rechargeable;
+}
+ 
+public double getProductDiscount() {
+return productDiscount;
+}
+ 
+public void setProductDiscount(double productDiscount) {
+this.productDiscount = productDiscount;
+}
+ 
+@Override
+public String toString() {
+return "Battery ["+ super.toString() + "productDiscount=" + productDiscount + " rechargeable=" + rechargeable + "]";
+}
+ 
+}
+ 
+Disc.java
+package com.di.constructorMethod;
+ 
+public class Disc extends Product {
+ 
+private int capacity;
+private double productDiscount;
+ 
+public Disc(int productId, String productName, double productPrice, int capacity) {
+super(productId, productName, productPrice);
+this.capacity = capacity;
+}
+ 
+public double getProductDiscount() {
+return productDiscount;
+}
+ 
+public void setProductDiscount(double productDiscount) {
+this.productDiscount = productDiscount;
+}
+ 
+@Override
+public String toString() {
+return "Disc [" + super.toString() + "productDiscount=" + productDiscount + " capacity=" + capacity + "MB" + "]";
+}
+ 
+ 
+ 
+} 
+ 
+ShoppingCart.java
+package com.scopes.iocContainer;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+import com.di.constructorMethod.Product;
+ 
+public class ShoppingCart {
+ 
+private List<Product> items = new ArrayList<>();
+ 
+public void addItem(Product item) {
+items.add(item);
+}
+ 
+public List<Product> getItems(){
+return items;
+}
+ 
+@Override
+public String toString() {
+return "ShoppingCart [items=" + items + "]";
+}
+ 
+}
+ 
+discounts.properties
+specialcustomer.discount=0.1
+summer.discount=0.15
+endofyear.discount=0.2
+ 
+applicationContext.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xmlns:util="http://www.springframework.org/schema/util" 
+      xmlns:p="http://www.springframework.org/schema/p" 
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd 
+          http://www.springframework.org/schema/util 
+          http://www.springframework.org/schema/util/spring-util.xsd"> 
+       
+      <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+                               <property name="location" value="discounts.properties" />
+</bean> 
+       
+      <bean id="battery" class="com.di.constructorMethod.Battery"> 
+                              <constructor-arg name="productId" value="101"></constructor-arg> 
+                              <constructor-arg name="productName" value="Nippo Battery"></constructor-arg> 
+                              <constructor-arg name="productPrice" value="15.50"></constructor-arg> 
+                              <constructor-arg name="rechargeable" value="true"></constructor-arg> 
+                              <property name="productDiscount" value="${specialcustomer.discount}"></property> 
+      </bean> 
+       
+      <bean id="disc" class="com.di.constructorMethod.Disc"> 
+                              <constructor-arg name="productId" value="201"></constructor-arg> 
+                              <constructor-arg name="productName" value="Hard Disk"></constructor-arg> 
+                              <constructor-arg name="productPrice" value="30"></constructor-arg> 
+                              <constructor-arg name="capacity" value="512"></constructor-arg> 
+                              <property name="productDiscount" value="${summer.discount}"></property> 
+      </bean> 
+       
+      <bean id="shoppingCart" class="com.scopes.iocContainer.ShoppingCart" scope="prototype"> 
+      </bean> 
+          
+</beans>
+ 
+App.java
+package com.scopes.iocContainer;
+ 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+ 
+import com.di.constructorMethod.Product;
+ 
+public class App {
+ 
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+ 
+ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+Product battery = (Product) ac.getBean("battery");
+Product disc = (Product) ac.getBean("disc");
+ 
+ShoppingCart cart1 = (ShoppingCart) ac.getBean("shoppingCart");
+cart1.addItem(battery);
+cart1.addItem(disc);
+ 
+ShoppingCart cart2 = (ShoppingCart) ac.getBean("shoppingCart");
+cart2.addItem(disc);
+ 
+System.out.println("First cart: " + cart1);
+System.out.println("Second cart: " + cart2);
+ 
+((AbstractApplicationContext) ac).close();
+ 
+}
+ 
+} 
+
+
+
+
+
+
+
+
+
+==========================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE PassengerDetails (
     Passenger_id INT AUTO_INCREMENT PRIMARY KEY,
     Passenger_name VARCHAR(50) NOT NULL,
